@@ -1,11 +1,11 @@
 # Awesome Node.js REST API Reference
-So, you want to create REST API using Node.js? This is the reference you need to build the right recipe.
+So, you want to create REST API service using Node.js? This is the reference you need to build the right recipe.
 
-This guide is created to address developer's pain points when creating REST API:
+This guide is created to address developer's pain points when creating REST API service:
 1. I want to make informed decision on which framework to choose --> [Check this out](#frameworks)
 2. Does framework X has Y feature ? --> [Here's the full map](#framework-features-map)
 3. What is a good package to handle Z stuff? --> [Check the alternatives here](#libraries)
-4. How can I make full REST API that suits my requirements ? --> [Check out our curated recipes](#recipes)
+4. How can I make full REST API service that suits my requirements ? --> [Check out our curated recipes](#recipes)
 
 ## Table of Contents
 - [Awesome Node.js REST API Reference](#awesome-nodejs-rest-api-reference)
@@ -101,9 +101,11 @@ Authentication and authorization are core features of any REST API. It ensures p
 - [firebase]() : 
 - 
 ### Router
+Router is must-have feature for REST API service. It basically map request URL to a controller, and bring relevant data along.
 - [koa-router](https://www.npmjs.com/package/koa-router) : router middleware for Koa framework
-- 
+  
 ### Database Driver
+REST API service may need to store or access data from database. Use library below to enable Node.js to connect to specific database. Also, note that some frameworks offer built-in driver.
 - [cassandra-driver](https://www.npmjs.com/package/cassandra-driver) : Node.js client library for Apache Cassandra and DSE using Cassandra's binary protocol and Cassandra Query Language.
 - [couchdb](https://www.npmjs.com/package/nano) : Offical Apache CouchDB library for Node.js.
 - [mongodb](https://www.npmjs.com/package/mongodb) : The official MongoDB driver for Node.js.
@@ -115,18 +117,40 @@ Authentication and authorization are core features of any REST API. It ensures p
 - [redis](https://www.npmjs.com/package/redis) : A high performance Node.js Redis client.
 - [sqlite](https://www.npmjs.com/package/sqlite) : A wrapper library written in Typescript with ZERO dependencies that adds ES6 promises and SQL-based migrations API to sqlite3
 ### ORM
+ORM is an abstraction layer between Node.js and database. It serves as data model definition, data caching, query builder, input sanitizer, and adapter for various databases, among others. 
+
+Developers have divided [opinions about ORM](https://medium.com/@mithunsasidharan/should-i-or-should-i-not-use-orm-4c3742a639ce). Some love it, some hate it. There are trade-offs:
+- ORM has some learning curve
+- ORM makes writing complex query cumbersome
+- ORM makes code shorter
+- ORM makes data model consistent with database constraints
+- ORM caches data and reduce loan on database
+One key takeaway: ORM is valuable for common REST API service with simple query access (e.g CRUD). 
+
+Interested in using ORM? Check out top-rated ORM packages below.
 - [knex](https://www.npmjs.com/package/knex) : A batteries-included, multi-dialect query builder for Node.js.
 - [mongoose](https://www.npmjs.com/package/mongoose) : A MongoDB object modeling tool designed to work in an asynchronous environment. Mongoose supports both promises and callbacks.
 - [sequelize](https://www.npmjs.com/package/sequelize) : A promise-based Node.js ORM tool for Postgres, MySQL, MariaDB, SQLite and Microsoft SQL Server. 
 - [waterline](https://www.npmjs.com/package/waterline) : Next-generation storage and retrieval engine, and the default ORM used in the Sails framework. Supports MySQL, MongoDB, neDB, and PostgreSQL.
 ### Request validation
-- [joi](https://www.npmjs.com/package/joi) : The most powerful schema description language and data validator for JavaScript.
+Under no circumstances a REST API could fully trust user's input. Invalid input may lead to an error that bring the service down, or worse, an injection attack with catastrophic consequences. That's why validation (including sanitation) is important in any REST API workflow. Check awesome validation packages available below.
+- [express-validator](https://www.npmjs.com/package/express-validator) : A validator middleware for Express framework, inspired by validator.js.
+- [joi](https://www.npmjs.com/package/joi) : The (self-proclaimed) most powerful schema description language and data validator for JavaScript.
+- [validator](https://www.npmjs.com/package/validator) : A library of string validators and sanitizers.
 ### Rate Limit
-- [fastify-rate-limit](https://github.com/fastify/fastify-rate-limit) : rate limit middleware for Fastify Framework
-- [koa-ratelimit](https://github.com/koajs/ratelimit) : rate limit middleware for Koa framework.
+Rate limit is feature of allowing limited number of request per period per IP address/token. For example, user can only send 1000 requests per day, and only 1 request per 10 second is allowed. Otherwise, server will send `429 Too Many Requests` HTTP response. It is useful feature when a REST API service has daily/monthly quota, or serve as security measure to prevent attacks. 
+- [@nestjs/throttler](https://www.npmjs.com/package/@nestjs/throttler) : A Rate-Limiter for NestJS, regardless of the context.
+- [express-rate-limit](https://www.npmjs.com/package/express-rate-limit) : Basic rate limit middleware for Express framework
+- [fastify-rate-limit](https://github.com/fastify/fastify-rate-limit) : Rate limit middleware for Fastify Framework
+- [hapi-rate-limitor](https://www.npmjs.com/package/hapi-rate-limitor) : Solid and easy to use rate limiting for Hapi framework.
+- [koa-ratelimit](https://github.com/koajs/ratelimit) : Rate limit middleware for Koa framework.
 ### Serve static files
 - [koa-static](https://www.npmjs.com/package/koa-static) : Static file serving middleware for Koa framework.
+- [serve-static](https://www.npmjs.com/package/serve-static) : Static file serving middleware for Express framework or an.
 ### File upload
+- [busboy](https://www.npmjs.com/package/busboy) : A node.js module for parsing incoming HTML form data.
+- [formidable](https://www.npmjs.com/package/formidable) : A Node.js module for parsing form data, especially file uploads.
+- [multer](https://www.npmjs.com/package/multer) : Node.js middleware for handling multipart/form-data, which is primarily used for uploading files.
 ### Multimedia file
 ### HTTP client
 REST API receives request and send response through HTTP/HTTPS protocol. But what if the server needs to talk to other services while processing request? HTTP client is the answer. Here is the list of well-known packages.
@@ -136,6 +160,7 @@ REST API receives request and send response through HTTP/HTTPS protocol. But wha
 - [superagent](https://www.npmjs.com/package/superagent) : Small progressive client-side HTTP request library, and Node.js module with the same API, supporting many high-level HTTP client features.
 ### Middleware
 ### Logging
+Many things happen inside a REST API service. In many cases, it is important to know when exactly something happens, written as records. It can be helpful for tracking errors, tracing fraud, or serving as data source for further analysis. That is the job of logging feature, and you can find suitable one for your project here.
 - [bunyan](https://www.npmjs.com/package/bunyan) : A simple and fast JSON logging library for node.js services:
 - [log4js-node](https://www.npmjs.com/package/log4js) : This is a conversion of the log4js framework to work with node.
 - [pino](https://www.npmjs.com/package/pino) : Very low overhead Node.js logger.
@@ -146,7 +171,7 @@ REST API receives request and send response through HTTP/HTTPS protocol. But wha
 - [ava](https://www.npmjs.com/package/ava) : Test runner for Node.js with a concise API, detailed error output, embrace of new language features and process isolation that lets you develop with confidence 🚀
 - [jest](https://www.npmjs.com/package/jest) : 🃏 Delightful JavaScript Testing, for all-round app types
 - [mocha](https://www.npmjs.com/package/mocha) : ☕️ Simple, flexible, fun JavaScript test framework for Node.js & The Browser ☕️
-- [supertest](https://www.npmjs.com/package/supertest) : HTTP assertions made easy via supe ragent.
+- [supertest](https://www.npmjs.com/package/supertest) : HTTP assertions made easy via superagent.
 ### Documentation
 REST API is useless when no one knows how to access it. That's where documentation library comes in. It usually requires REST API definitions, then magically convert it to accessible HTML page. 
 - [@nestjs/swagger](https://www.npmjs.com/package/@nestjs/swagger) : OpenAPI (Swagger) module for Nest framework
@@ -155,6 +180,7 @@ REST API is useless when no one knows how to access it. That's where documentati
 - [swagger-ui-express](https://www.npmjs.com/package/swagger-ui-express) : Generate swagger-ui API docs in Express framework, based on a swagger.json file.
 - [typedoc](https://www.npmjs.com/package/typedoc) : Documentation generator for TypeScript projects as CLI or npm package.
 ### Process Manager
+When the project is ready, it needs to run on server. Run simple commands, and it's up. However, what if a REST API service crashes at midnight? What if you need to run multiple service instances? What if you have hundreds of services? A process manager can help with that. It handles deployed service nicely, auto-restart crashed service, etc. Production deployment without process manager is simply impossible.
 - [forever](https://www.npmjs.com/package/forever) : A simple CLI tool for ensuring that a given script runs continuously (i.e. forever).
 - [nodemon](https://www.npmjs.com/package/nodemon) : A tool that helps develop node.js based applications by automatically restarting the node application when file changes in the directory are detected.
 - [pm2](https://www.npmjs.com/package/pm2) : Production process manager for Node.js applications with a built-in load balancer. It allows you to keep applications alive forever, to reload them without downtime and to facilitate common system admin tasks.
