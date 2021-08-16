@@ -14,23 +14,23 @@ This guide is created to address developer's pain points when creating REST API 
     - [Framework Details](#framework-details)
     - [Framework Features Map](#framework-features-map)
   - [Libraries](#libraries)
-    - [`.env` variable](#env-variable)
-    - [CORS](#cors)
-    - [Auth](#auth)
-    - [Router](#router)
-    - [Database Driver](#database-driver)
-    - [ORM](#orm)
-    - [Request validation](#request-validation)
-    - [Rate Limit](#rate-limit)
-    - [Serve static files](#serve-static-files)
-    - [File upload](#file-upload)
-    - [Multimedia file](#multimedia-file)
-    - [HTTP client](#http-client)
-    - [Middleware](#middleware)
-    - [Logging](#logging)
-    - [Testing](#testing)
-    - [Documentation](#documentation)
-    - [Process Manager](#process-manager)
+    - [`.env` variable 🛠](#env-variable-)
+    - [CORS 🚧](#cors-)
+    - [Auth 🗝](#auth-)
+    - [Router 🚏](#router-)
+    - [Database Driver 🛢](#database-driver-)
+    - [ORM 🗺](#orm-)
+    - [Request validation ⭕️](#request-validation-️)
+    - [Rate Limit 🚦](#rate-limit-)
+    - [Serve static files ⚡](#serve-static-files-)
+    - [File upload 🖼](#file-upload-)
+    - [Multimedia file 🎞](#multimedia-file-)
+    - [HTTP client 📡](#http-client-)
+    - [Middleware 🏃](#middleware-)
+    - [Logging 📃](#logging-)
+    - [Testing 🧐](#testing-)
+    - [Documentation 📖](#documentation-)
+    - [Process Manager ⚙️](#process-manager-️)
   - [Other Libraries](#other-libraries)
     - [Template Engine](#template-engine)
     - [Email](#email)
@@ -88,23 +88,23 @@ The following table shows built-in features included in each framework.
 | Rate Limit      |         |     |         |      |      |       |        | ✅     |          |
 
 ## Libraries
-### `.env` variable
+### `.env` variable 🛠
 Configuring proper `.env` config is crucial because we don't want to reveal credentials in the codebase.
 - [dotenv](https://www.npmjs.com/package/dotenv) : Zero-dependency module that loads environment variables from `.env` file into `process.env`.
 - [env-cmd](https://www.npmjs.com/package/env-cmd) : A simple node program for executing commands using an environment from an env file.
 - [cross-env](https://www.npmjs.com/package/cross-env) : Run scripts that set and use environment variables across platforms (⚠️*maintenance mode*⚠️)
-### CORS
+### CORS 🚧
 Setup CORS for better security control.
 - [cors](https://www.npmjs.com/package/cors) : Node.js package for providing a Connect/Express middleware that can be used to enable CORS with various options.
-### Auth
+### Auth 🗝
 Authentication and authorization are core features of any REST API. It ensures proper security on back-end. Many solutions are available. Just pick one. One important advice, though: Don't make your own auth algorithm.
 - [firebase]() : 
 - 
-### Router
+### Router 🚏
 Router is must-have feature for REST API service. It basically map request URL to a controller, and bring relevant data along.
 - [koa-router](https://www.npmjs.com/package/koa-router) : router middleware for Koa framework
   
-### Database Driver
+### Database Driver 🛢
 REST API service may need to store or access data from database. Use library below to enable Node.js to connect to specific database. Also, note that some frameworks offer built-in driver.
 - [cassandra-driver](https://www.npmjs.com/package/cassandra-driver) : Node.js client library for Apache Cassandra and DSE using Cassandra's binary protocol and Cassandra Query Language.
 - [couchdb](https://www.npmjs.com/package/nano) : Offical Apache CouchDB library for Node.js.
@@ -116,10 +116,10 @@ REST API service may need to store or access data from database. Use library bel
 - [pg-promise](https://www.npmjs.com/package/pg-promise) : Promise-based PostgreSQL client for Node.js, built on top of node-postgres.
 - [redis](https://www.npmjs.com/package/redis) : A high performance Node.js Redis client.
 - [sqlite](https://www.npmjs.com/package/sqlite) : A wrapper library written in Typescript with ZERO dependencies that adds ES6 promises and SQL-based migrations API to sqlite3
-### ORM
+### ORM 🗺
 ORM is an abstraction layer between Node.js and database. It serves as data model definition, data caching, query builder, input sanitizer, and adapter for various databases, among others. 
 
-Developers have divided [opinions about ORM](https://medium.com/@mithunsasidharan/should-i-or-should-i-not-use-orm-4c3742a639ce). Some love it, some hate it. There are trade-offs:
+Developers have divided [opinions about ORM](https://medium.com/@mithunsasidharan/should-i-or-should-i-not-use-orm-4c3742a639ce). Some love it ❤️, some hate it💢. There are trade-offs:
 - ORM has some learning curve
 - ORM makes writing complex query cumbersome
 - ORM makes code shorter
@@ -132,34 +132,35 @@ Interested in using ORM? Check out top-rated ORM packages below.
 - [mongoose](https://www.npmjs.com/package/mongoose) : A MongoDB object modeling tool designed to work in an asynchronous environment. Mongoose supports both promises and callbacks.
 - [sequelize](https://www.npmjs.com/package/sequelize) : A promise-based Node.js ORM tool for Postgres, MySQL, MariaDB, SQLite and Microsoft SQL Server. 
 - [waterline](https://www.npmjs.com/package/waterline) : Next-generation storage and retrieval engine, and the default ORM used in the Sails framework. Supports MySQL, MongoDB, neDB, and PostgreSQL.
-### Request validation
+### Request validation ⭕️
 Under no circumstances a REST API could fully trust user's input. Invalid input may lead to an error that bring the service down, or worse, an injection attack with catastrophic consequences. That's why validation (including sanitation) is important in any REST API workflow. Check awesome validation packages available below.
 - [express-validator](https://www.npmjs.com/package/express-validator) : A validator middleware for Express framework, inspired by validator.js.
 - [joi](https://www.npmjs.com/package/joi) : The (self-proclaimed) most powerful schema description language and data validator for JavaScript.
 - [validator](https://www.npmjs.com/package/validator) : A library of string validators and sanitizers.
-### Rate Limit
+### Rate Limit 🚦
 Rate limit is feature of allowing limited number of request per period per IP address/token. For example, user can only send 1000 requests per day, and only 1 request per 10 second is allowed. Otherwise, server will send `429 Too Many Requests` HTTP response. It is useful feature when a REST API service has daily/monthly quota, or serve as security measure to prevent attacks. 
 - [@nestjs/throttler](https://www.npmjs.com/package/@nestjs/throttler) : A Rate-Limiter for NestJS, regardless of the context.
 - [express-rate-limit](https://www.npmjs.com/package/express-rate-limit) : Basic rate limit middleware for Express framework
 - [fastify-rate-limit](https://github.com/fastify/fastify-rate-limit) : Rate limit middleware for Fastify Framework
 - [hapi-rate-limitor](https://www.npmjs.com/package/hapi-rate-limitor) : Solid and easy to use rate limiting for Hapi framework.
 - [koa-ratelimit](https://github.com/koajs/ratelimit) : Rate limit middleware for Koa framework.
-### Serve static files
+### Serve static files ⚡
 - [koa-static](https://www.npmjs.com/package/koa-static) : Static file serving middleware for Koa framework.
 - [serve-static](https://www.npmjs.com/package/serve-static) : Static file serving middleware for Express framework or an.
-### File upload
+### File upload 🖼
+Some REST API services need capability to receive file as input. Note that file upload With packages below, it is possible.
 - [busboy](https://www.npmjs.com/package/busboy) : A node.js module for parsing incoming HTML form data.
 - [formidable](https://www.npmjs.com/package/formidable) : A Node.js module for parsing form data, especially file uploads.
 - [multer](https://www.npmjs.com/package/multer) : Node.js middleware for handling multipart/form-data, which is primarily used for uploading files.
-### Multimedia file
-### HTTP client
+### Multimedia file 🎞
+### HTTP client 📡
 REST API receives request and send response through HTTP/HTTPS protocol. But what if the server needs to talk to other services while processing request? HTTP client is the answer. Here is the list of well-known packages.
 - [axios](https://www.npmjs.com/package/axios) : Promise based HTTP client for the browser and node.js
 - [bent](https://www.npmjs.com/package/bent) : Functional HTTP client for Node.js and Browsers with async/await. Incredibly small browser version built on fetch with no external dependencies or polyfills.
 - [node-fetch](https://www.npmjs.com/package/node-fetch) : A light-weight module that brings window.fetch to Node.js
 - [superagent](https://www.npmjs.com/package/superagent) : Small progressive client-side HTTP request library, and Node.js module with the same API, supporting many high-level HTTP client features.
-### Middleware
-### Logging
+### Middleware 🏃
+### Logging 📃
 Many things happen inside a REST API service. In many cases, it is important to know when exactly something happens, written as records. It can be helpful for tracking errors, tracing fraud, or serving as data source for further analysis. That is the job of logging feature, and you can find suitable one for your project here.
 - [bunyan](https://www.npmjs.com/package/bunyan) : A simple and fast JSON logging library for node.js services:
 - [log4js-node](https://www.npmjs.com/package/log4js) : This is a conversion of the log4js framework to work with node.
@@ -167,27 +168,28 @@ Many things happen inside a REST API service. In many cases, it is important to 
 - [signale](https://www.npmjs.com/package/signale) : Hackable and configurable log
 - [tracer](https://www.npmjs.com/package/tracer) : A powerful and customizable logging library for node.js.
 - [winston](https://www.npmjs.com/package/winston) : A simple and universal logging library with support for multiple transports.
-### Testing
+### Testing 🧐
+Testing is important part of development to make sure REST API service works as expected and can handle errors gracefully. For REST API, it is recommended to focus on unit testing and integration testing. Component testing, which is important for front-end, is not a concern here.
 - [ava](https://www.npmjs.com/package/ava) : Test runner for Node.js with a concise API, detailed error output, embrace of new language features and process isolation that lets you develop with confidence 🚀
 - [jest](https://www.npmjs.com/package/jest) : 🃏 Delightful JavaScript Testing, for all-round app types
 - [mocha](https://www.npmjs.com/package/mocha) : ☕️ Simple, flexible, fun JavaScript test framework for Node.js & The Browser ☕️
 - [supertest](https://www.npmjs.com/package/supertest) : HTTP assertions made easy via superagent.
-### Documentation
+### Documentation 📖
 REST API is useless when no one knows how to access it. That's where documentation library comes in. It usually requires REST API definitions, then magically convert it to accessible HTML page. 
 - [@nestjs/swagger](https://www.npmjs.com/package/@nestjs/swagger) : OpenAPI (Swagger) module for Nest framework
 - [apidoc](https://www.npmjs.com/package/apidoc) : Generate a documentation from API descriptions in your source code. See [live demo](https://apidocjs.com/example/).
 - [redoc](https://www.npmjs.com/package/redoc) : React-based documentation generator compliant with OpenAPI. See [live demo](http://redocly.github.io/redoc/?).
 - [swagger-ui-express](https://www.npmjs.com/package/swagger-ui-express) : Generate swagger-ui API docs in Express framework, based on a swagger.json file.
 - [typedoc](https://www.npmjs.com/package/typedoc) : Documentation generator for TypeScript projects as CLI or npm package.
-### Process Manager
-When the project is ready, it needs to run on server. Run simple commands, and it's up. However, what if a REST API service crashes at midnight? What if you need to run multiple service instances? What if you have hundreds of services? A process manager can help with that. It handles deployed service nicely, auto-restart crashed service, etc. Production deployment without process manager is simply impossible.
+### Process Manager ⚙️
+Process Manager helps with deployment, ensuring REST API services run without much headache to developer. It handles running and organizing scripts, doing auto-restart, some even have load balancer and logging.
 - [forever](https://www.npmjs.com/package/forever) : A simple CLI tool for ensuring that a given script runs continuously (i.e. forever).
 - [nodemon](https://www.npmjs.com/package/nodemon) : A tool that helps develop node.js based applications by automatically restarting the node application when file changes in the directory are detected.
 - [pm2](https://www.npmjs.com/package/pm2) : Production process manager for Node.js applications with a built-in load balancer. It allows you to keep applications alive forever, to reload them without downtime and to facilitate common system admin tasks.
 - [supervisor](https://www.npmjs.com/package/supervisor) : A little supervisor script for nodejs. It runs your program and watches for code changes without worrying about memory leaks and making sure you clean up all the inter-module references.
 
 ## Other Libraries
-### Template Engine
+### Template Engine 
 Template engine is not essential since most REST APIs return JSON data. But in any case it is needed, here is the list:
 - [](https://www.npmjs.com/package/)
 ### Email
@@ -195,4 +197,6 @@ Template engine is not essential since most REST APIs return JSON data. But in a
 ### Encryption 
 ## Recipes
 ## Licenses
+This project uses MIT license.
 ## Contribution
+This project is open for content correction, update, expansion, as well as translation to other language. Simply fork this repository, make necessary changes, then submit a [pull request](https://github.com/yogski/awesome-nodejs-rest-api/pulls).
